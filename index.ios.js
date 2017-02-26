@@ -1,27 +1,26 @@
- import React, { Component } from 'react';
- import {
-   AppRegistry,
-   StyleSheet,
-   Text,
-   View
- } from 'react-native';
- import LoginView from "./src/screens/LoginView";
- import SignupView from "./src/screens/LoginView";
 
- export default class screens extends Component {
-   render() {
-     return (
-       <View style={styles.container}>
-         <SignupView />
-       </View>
-     );
-   }
- }
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  NavigatorIOS,
+  View
+} from 'react-native';
+var LoginView = require("./src/screens/LoginView");
+import {LoginStyles} from './src//styles/LoginStyles'
 
- const styles = StyleSheet.create({
-   container: {
-     flex: 1,
-   }
- });
+var ReactProject = React.createClass({
+    render: function() {
+        return (
+            <NavigatorIOS
+                style={LoginStyles.NavigationContainer}
+                initialRoute={{
+                title: "Login Form",
+                component: LoginView,
+            }} />
+        );
+    }
+});
 
- AppRegistry.registerComponent('LoginForm', () => screens);
+AppRegistry.registerComponent('LoginForm', () => ReactProject);
