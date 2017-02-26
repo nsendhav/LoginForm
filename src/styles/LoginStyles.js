@@ -34,7 +34,15 @@ const LoginStyles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
     marginLeft: 20,
-    marginRight: 20,
+    width: 100,
+    height: 100,
+  },
+  imagePhoto: {
+    backgroundColor: "#ff69b4",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 100,
+    height: 100,
   },
   button: {
     backgroundColor: "#FF3366",

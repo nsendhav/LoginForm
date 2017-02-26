@@ -8,10 +8,13 @@ import {
   TouchableHighlight,
   View,
   Button,
+  Image,
+  avatarSource,
   ScrollView,
   TouchableOpacity,
   Dimensions
 } from 'react-native';
+var ImagePicker = require('react-native-image-picker');
 var LoginDetailView = require("./LoginDetailView");
 import {LoginStyles} from '../styles/LoginStyles'
 const { width, height } = Dimensions.get("window");
@@ -25,6 +28,7 @@ class LoginView extends Component {
             phoneNumber: "",
             DateOfBirth: "",
             Gender: "",
+            avatarSource,
         };
     }
 
@@ -72,8 +76,8 @@ class LoginView extends Component {
                 style={LoginStyles.input}
                 />
             </View>
-            <TouchableHighlight onPress={(this.onSubmitPressed.bind(this))} style={LoginStyles.buttonPhoto} backgroundColor="#ff69b4">
-              <Text style={LoginStyles.buttonText}>Photo</Text>
+            <TouchableHighlight onPress={(this.onPhotoPressed.bind(this))} style={LoginStyles.buttonPhoto} backgroundColor="#ff69b4">
+            <Image source={this.state.avatarSource} style={LoginStyles.imagePhoto} />
             </TouchableHighlight>
             <TouchableHighlight onPress={(this.onSubmitPressed.bind(this))} style={LoginStyles.button}>
               <Text style={LoginStyles.buttonText}>Submit</Text>
@@ -88,46 +92,32 @@ class LoginView extends Component {
             passProps: {username: this.state.username, email: this.state.email, phoneNumber: this.state.phoneNumber, DateOfBirth: this.state.DateOfBirth, Gender: this.state.Gender},
         });
     }
-};
 
-var styles = StyleSheet.create({
-    container: {
-        padding: 30,
-        marginTop: 65,
-        alignItems: "stretch"
-    },
-    title: {
-        fontSize: 18,
-        marginBottom: 10
-    },
-    formInput: {
-        height: 36,
-        padding: 10,
-        marginRight: 5,
-        marginBottom: 5,
-        marginTop: 5,
-        flex: 1,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: "#555555",
-        borderRadius: 8,
-        color: "#555555"
-    },
-    button: {
-        height: 36,
-        flex: 1,
-        backgroundColor: "#555555",
-        borderColor: "#555555",
-        borderWidth: 1,
-        borderRadius: 8,
-        marginTop: 10,
-        justifyContent: "center"
-    },
-    buttonText: {
-        fontSize: 18,
-        color: "#ffffff",
-        alignSelf: "center"
-    },
+onPhotoPressed() {
+    ImagePicker.showImagePicker(null, (response) => {
+  console.log('Response = ', response);
+
+  if (response.didCancel) {
+    console.log('User cancelled image picker');
+  }
+  else if (response.error) {
+    console.log('ImagePicker Error: ', response.error);
+  }
+  else if (response.customButton) {
+    console.log('User tapped custom button: ', response.customButton);
+  }
+  else {
+    let source = { uri: response.uri };
+
+    // You can also display the image using data:
+    // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+    this.setState({
+      avatarSource: source
+    });
+  }
 });
+}
+};
 
 module.exports = LoginView;
