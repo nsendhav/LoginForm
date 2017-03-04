@@ -17,6 +17,7 @@ import {
 var ImagePicker = require('react-native-image-picker');
 var LoginDetailView = require("./LoginDetailView");
 import {LoginStyles} from '../styles/LoginStyles'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 class LoginView extends Component {
     constructor(props) {
@@ -33,6 +34,7 @@ class LoginView extends Component {
 
     render() {
       return (
+        <KeyboardAwareScrollView>
         <ScrollView style={LoginStyles.container}>
             <TouchableHighlight onPress={(this.onPhotoPressed.bind(this))} style={LoginStyles.buttonPhoto} backgroundColor="#ff69b4">
             <Image source={this.state.avatarSource} style={LoginStyles.imagePhoto} />
@@ -82,6 +84,7 @@ class LoginView extends Component {
               <Text style={LoginStyles.buttonText}>Submit</Text>
             </TouchableHighlight>
         </ScrollView>
+      </KeyboardAwareScrollView>
       );
     }
     onSubmitPressed() {
