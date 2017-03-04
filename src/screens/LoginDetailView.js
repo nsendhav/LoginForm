@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Image,
 } from 'react-native';
 import {LoginDetailStyles} from '../styles/LoginDetailStyles'
 
@@ -17,12 +18,14 @@ class LoginDetailView extends Component {
             phoneNumber: this.props.phoneNumber,
             DateOfBirth: this.props.DateOfBirth,
             Gender: this.props.Gender,
+            avatarSource: this.props.avatarSource,
         };
     }
 
     render() {
         return (
             <View style={LoginDetailStyles.container}>
+                <Image source={this.state.avatarSource} style={LoginDetailStyles.profilePhoto} />
                 <Text style={LoginDetailStyles.heading}>
                     Name: {this.props.username}
                 </Text>

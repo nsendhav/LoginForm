@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
+const { width, height } = Dimensions.get("window");
 
 const LoginStyles = StyleSheet.create({
   NavigationContainer: {
@@ -28,16 +29,18 @@ const LoginStyles = StyleSheet.create({
     color: '#FFF',
   },
   buttonPhoto: {
+    flex: 1,
     backgroundColor: "#ff69b4",
     paddingVertical: 20,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    marginLeft: 20,
+    marginLeft: width / 2 -50,
     width: 100,
     height: 100,
   },
   imagePhoto: {
+
     backgroundColor: "#ff69b4",
     alignItems: "center",
     justifyContent: "center",
